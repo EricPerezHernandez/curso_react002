@@ -1,8 +1,13 @@
-//Dependencies
+// Dependencies
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+//import { Results } from './Results';
+
+// API
 import { fetchPet } from '../api/fetchPet';
-import { Results } from './Results';
+
+// Components
+import Carousel from './Carousel';
 
 export const Details = () => {
   const { id } = useParams();
@@ -22,6 +27,7 @@ export const Details = () => {
 
   return (
     <div className="details">
+      <Carousel images={pet.images} />
       <div>
         <center>
           <img src={pet.images[0]} alt={''} width="10%" />
