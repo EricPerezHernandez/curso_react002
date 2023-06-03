@@ -23,6 +23,9 @@ export const Details = () => {
   return (
     <div className="details">
       <div>
+        <center>
+          <img src={pet.images[0]} alt={''} width="10%" />
+        </center>
         <h1>{pet.name}</h1>
         <h2>{`${pet.animal} - ${pet.breed} - ${pet.city} - ${pet.state}`}</h2>
         <button>Adopt {pet.name}</button>
