@@ -1,27 +1,36 @@
 // Dependencies
-import {createRoot} from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-//Components
-import {Pet} from './Pet';
+// Components
+import { SearchParams } from './components/SearchParams';
+import { Details } from './components/Details';
 
-// Componente porque tiene la primera letra en mayúscula. olo devuelve un elemento de react. 
-// A diferencia de una funcion, que devuelve lo que se defina dentro de ella
-/*const App = () => {
-    console.log('Hello');
-    return (
-        <div>
-            <h1>Hello World!</h1>
-        </div>
-    );
-};*/
-// Si no se tiene lógica, se omite return
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+      cacheTime: Infinity,
+    },
+  },
+});
+
 const App = () => (
-    <div>
-        <Pet name="Terry02" animal="Cotorro" breed="croquetas"/>
-    </div>
-
+  <div>
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <header>
+          <Link to="/">Adopt Me!</Link>
+        </header>
+        <Routes>
+          <Route path="/details/:id" element={<Details />} />
+          <Route path="/" element={<SearchParams />} />
+        </Routes>
+      </QueryClientProvider>
+    </BrowserRouter>
+  </div>
 );
-
 
 const container = document.getElementById('root');
 const root = createRoot(container);
